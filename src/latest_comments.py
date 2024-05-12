@@ -20,8 +20,12 @@ class CommentParser:
                 upvote, downvote = cmnt_div.find("span", class_="ratingplus").find("span").text, cmnt_div.find("span", class_="ratingminus").find("span").text
                 
                 novel_name = cmnt_div.find("h4")["title"]
-                novel_image_url = cmnt_div.find("img")["src"]
-                novel_url = cmnt_div.find("a")["href"]
+                novel_image_src = cmnt_div.find("img")["src"]
+                novel_image_url = f"https://ranobes.top{novel_image_src}"
+                
+                comment_url = cmnt_div.find("div", class_="com_content").find("a")["href"]
+                novel_url = comment_url.split("#")[0]
+                
                 novel_chapter_raw = cmnt_div.find("b", class_="title").find("a").text
                 
                 try:
@@ -44,12 +48,12 @@ class CommentParser:
                 
                 author = Author(name=author_name, profile_url=author_profile_url, image_url=author_image_url)
                 novel = Novel(name=novel_name, novel_url=novel_url, image_url=novel_image_url, chapter=novel_chapter)
-                comment = Comment(author=author, upvote=upvote, downvote=downvote, novel=novel, comment=comment_text)
+                comment = Comment(author=author, upvote=upvote, downvote=downvote, novel=novel, comment=comment_text, comment_url=comment_url)
                 
                 comments.append(comment)
         
             except Exception as e:
                 print(e)
-                
+
         return comments
             
