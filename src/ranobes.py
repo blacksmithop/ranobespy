@@ -18,7 +18,7 @@ class Ranobes:
 
     async def fetch_comment_data(self):
         response = await self.session.post(f"{BASE_URL}?do=lastcomments")
-        await response.html.arender()
+        # await response.html.arender()
         return response
     
     def get_latest_comments(self):
