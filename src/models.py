@@ -1,10 +1,10 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Union
 
 class Novel(BaseModel):
     name: str
     novel_url: str
-    chapter: Optional[int] = None
+    chapter: Union[int, float, None] = None
     image_url: str
 
 class Author(BaseModel):

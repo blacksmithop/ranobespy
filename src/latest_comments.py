@@ -31,7 +31,11 @@ class CommentParser:
                     else:
                         chapter_num = chapter_num.split(" ")[1]
                         chapter_num = chapter_num.rstrip(":.")
-                        novel_chapter = int(chapter_num)
+                        chapter_num = chapter_num.replace('\ufeff', '')
+                        try:
+                            novel_chapter = int(chapter_num)
+                        except Exception as e:
+                            novel_chapter = float(chapter_num)
                 except Exception as e:
                     print(e)
                     novel_chapter = None
