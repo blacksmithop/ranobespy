@@ -18,4 +18,5 @@ class Comment(BaseModel):
     downvote: int
     novel: Novel
     comment: str
+    comment_url: str
 
